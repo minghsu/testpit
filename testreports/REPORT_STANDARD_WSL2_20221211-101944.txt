@@ -1,0 +1,15 @@
+
+--------------------------------------------------------------------------------
+Project: WSL2
+Description: Simple Network Test
+--------------------------------------------------------------------------------
+Starting time: 2022/12/11 10:19:31
+
+ 1  -    SKIP    -         N/A          - shell-1 ping hinet
+ 2  -    SKIP    -         N/A          - docker-1 ping hinet
+ 3  -    SKIP    -         N/A          - ssh-1 ping hinet
+ 4  -    PASS    - 156 Gbits/130 Gbits  - iperf3 test between shell-1 and ssh-1
+Total tested case: 4, pass: 1, skip: 3, fail: 0, unknown: 0, pass rate: 25.0%
+
+Finished time: 2022/12/11 10:19:44
+--------------------------------------------------------------------------------

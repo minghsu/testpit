@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testpit>
+    <project>WSL2</project>
+    <description>Simple Network Test</description>
+    <node>
+        <device>
+            <name>shell-1</name>
+            <type>ubuntu</type>
+            <color>blue</color>
+            <connect>            
+                <type>shell</type>
+                <shell>bash</shell>
+                <timeout>5</timeout>
+            </connect>
+            <command>
+                <pre>
+                    <cmd>ifconfig</cmd>
+                </pre>
+                <post>
+                    <cmd>ip r s</cmd>
+                    <cmd>ip -6 r s</cmd>
+                </post>
+            </command>
+        </device>
+        <device>
+            <name>docker-1</name>
+            <type>ubuntu</type>
+            <color>cyan</color>
+            <connect>            
+                <type>docker</type>
+                <image>ubuntu:v3</image>
+                <timeout>5</timeout>
+            </connect>
+            <command>
+                <pre>
+                    <cmd>ifconfig</cmd>
+                </pre>
+                <post>
+                    <cmd>ip r s</cmd>
+                </post>
+            </command>
+        </device>    
+        <device>
+            <name>ssh-1</name>
+            <type>ubuntu</type>
+            <color>yellow</color>
+            <connect>
+                <type>ssh</type>
+                <username>mingsheu</username>
+                <password>yif9ui7c</password>
+                <hostname>127.0.0.1</hostname>
+                <timeout>5</timeout>
+            </connect>
+            <command>
+                <pre>
+                    <cmd>ifconfig</cmd>
+                </pre>
+                <post>
+                    <cmd>ip r s</cmd>
+                </post>
+            </command>
+        </device>
+    </node>
+    <test>
+        <case>
+            <name>ping</name>
+            <description>shell-1 ping hinet</description>
+            <device>shell-1</device>
+            <ifname>eth0</ifname>
+            <dest>www.hinet.net</dest>
+            <ipv6>0</ipv6>
+            <count>5</count>
+            <timeout type="int">10</timeout>
+            <skip>1</skip>
+        </case>
+        <case>
+            <name>ping</name>
+            <description>docker-1 ping hinet</description>
+            <device>docker-1</device>
+            <ifname>eth0</ifname>
+            <dest>www.hinet.net</dest>
+            <ipv6>0</ipv6>
+            <count>5</count>
+            <timeout type="int">10</timeout>
+            <skip>1</skip>
+        </case>
+        <case>
+            <name>ping</name>
+            <description>ssh-1 ping hinet</description>
+            <device>ssh-1</device>
+            <ifname>eth0</ifname>
+            <dest>www.hinet.net</dest>
+            <ipv6>0</ipv6>
+            <count>5</count>
+            <timeout type="int">10</timeout>
+            <skip>1</skip>
+        </case>
+        <case>
+            <name>iperf3</name>
+            <description>iperf3 test between shell-1 and ssh-1</description>
+            <server>ssh-1</server>
+            <client>shell-1</client>
+            <time>11</time>
+            <udp>1</udp>
+            <reverse>1</reverse>
+            <ipv6>0</ipv6>
+            <timeout type="int">20</timeout>
+        </case>
+    </test>
+</testpit>
